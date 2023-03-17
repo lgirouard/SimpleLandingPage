@@ -1,5 +1,5 @@
 // Options
-const showAmPm = true;
+const showAmPm = true
 
 // DOM Elements
 /**
@@ -15,12 +15,14 @@ const time = $('time')
 const greeting = $('greeting')
 const name = $('name')
 const focus = $('focus')
+const moreInfo = $('moreInfo')
+
 
 /**
  * Separates the hours, min, seconds of current time to display.
  */
 function showTime () {
-    //let today = new Date(2023, 06, 10, 20, 33, 30), // Testing for night
+  //let today = new Date(2023, 06, 10, 20, 33, 30), // Testing for night
   let today = new Date(),
     hour = today.getHours(),
     min = today.getMinutes(),
@@ -35,7 +37,7 @@ function showTime () {
   //Output time
   time.innerHTML = `${hour}<span>:</span>${addZero(min)}<span>:</span>${addZero(
     seconds
-  )} ${showAmPm ? amPm : ''}`;
+  )} ${showAmPm ? amPm : ''}`
   setTimeout(showTime, 1000)
 }
 
@@ -53,18 +55,23 @@ function addZero (n) {
  * Sets the background and greeting based on the current time.
  */
 function setBackgroundGreeting () {
-    // let today = new Date(2023, 06, 10, 20, 33, 30) // Testing for night
-let today = new Date(),
-  hour = today.getHours()
+  // TODO : Make image fit to screen
+
+   //let today = new Date(2023, 06, 10, 20, 33, 30), // Testing for night
+  let today = new Date(),
+    hour = today.getHours()
 
   if (hour < 12) {
     //Morning
     document.body.style.backgroundImage = "url('../img/morning.jpg')"
     greeting.textContent = 'Good Morning'
+    focus.style.color = 'white'
+    
   } else if (hour < 18) {
     // Afternooon
     document.body.style.backgroundImage = "url('../img/afternoon.jpg')"
     greeting.textContent = 'Good Afternoon'
+    document.h2.color = 'white'
   } else {
     // Evening
     document.body.style.backgroundImage = "url('../img/evening.jpg')"
@@ -96,7 +103,7 @@ function setName (e) {
     if (e.keycode === 13) {
       // 13 = enter key (which is deprecated)
       localStorage.setItem('name', e.target.innerText)
-      name.blur();
+      name.blur()
     }
   } else {
     // if event is blur, save NAME to local storage
@@ -116,23 +123,26 @@ function getFocus () {
   }
 }
 function setFocus (e) {
-    if (e.type === 'keypress') {
-      // if event is keypress (enter), save FOCUS to local storage
-      if (e.keycode === 13) {
-        // 13 = enter key (which is deprecated)
-        localStorage.setItem('focus', e.target.innerText)
-        focus.blur();
-      }
-    } else {
-      // if event is blur, save NAME to local storage
+  if (e.type === 'keypress') {
+    // if event is keypress (enter), save FOCUS to local storage
+    if (e.keycode === 13) {
+      // 13 = enter key (which is deprecated)
       localStorage.setItem('focus', e.target.innerText)
+      focus.blur()
     }
+  } else {
+    // if event is blur, save NAME to local storage
+    localStorage.setItem('focus', e.target.innerText)
   }
+}
 
 name.addEventListener('keypress', setName)
 name.addEventListener('blur', setName)
 focus.addEventListener('keypress', setFocus)
 focus.addEventListener('blur', setFocus)
+
+// Test Buttons
+
 // run
 showTime()
 setBackgroundGreeting()

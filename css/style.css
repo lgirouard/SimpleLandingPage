@@ -13,6 +13,8 @@ body{
     text-align: center;
     height: 100vh;
     color: black;
+
+    background-size:auto;
 }
 
 #time{
@@ -33,4 +35,5 @@ h2{
     #time{
         font-size: 6rem;
     }
+
 }
